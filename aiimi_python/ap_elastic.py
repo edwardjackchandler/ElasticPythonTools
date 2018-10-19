@@ -108,7 +108,8 @@ class ApElastic:
 
     def add_property_all_docs(self, index_name, type, property_name, property_value, search_query="*"):
 
-        docs = self.es.search(index=index_name, size=10000, _source=False, q=search_query + " AND !{0}:{1}".format(property_name, property_value))
+        docs = self.es.search(index=index_name, size=10000, _source=False, q=search_query + 
+                " AND !{0}:{1}".format(property_name, property_value))
 
         for doc in docs['hits']['hits']:
             print("Update ID: " + doc['_id'])
@@ -124,4 +125,3 @@ class ApElastic:
         }
 
         return doc_update
-        
