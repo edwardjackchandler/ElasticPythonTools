@@ -2,7 +2,7 @@ from elasticsearch import Elasticsearch
 from elasticsearch import helpers
 import csv
 
-class AplElastic:
+class ApElastic:
 
     def __init__(self, port, host):
         self.es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
@@ -29,18 +29,6 @@ class AplElastic:
             helpers.bulk(self.es, reader, index=index_name, doc_type=type)
 
 
-
-    def __csv_ingest(self, csv_location, index_name):
-        '''
-        Ingest a CSV into Elasticsearch
-
-        :param csv_location:
-        :param index_name:
-        :return:
-        '''
-        csv = pd.DataFrame.from_csv(csv_location)
-
-    #WORKING BUT NEED TO HANDLE THE TIMEOUT ERRORS
     def reindex(self, original_index_name, target_index_name, delete_original_index=False, delete_target_index=False):
 
         if delete_target_index is True:
